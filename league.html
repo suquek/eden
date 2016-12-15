@@ -1,0 +1,364 @@
+<!doctype html>
+<head>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="viewport" content="width=device-width">
+		
+	<title>EDEN ATHLETIC CLUB :: LEAGUE</title>
+	
+	<script type="text/javascript" src="incl_/js/standalone.js"></script>
+
+	<link rel="stylesheet" href="incl_/css/normalize.css" />	
+  <link rel="stylesheet" href="incl_/css/custom.css" />
+  <link rel="stylesheet" href="incl_/css/text.css" />
+  <link rel="stylesheet" href="incl_/css/header_footer.css" />
+	<link rel="stylesheet" href="incl_/css/columns.css" />
+	
+	<style type="text/css">	
+		.lg {
+			font-size: 1.3em;
+		}
+
+		#teams {
+			float: left;
+			white-space: nowrap;
+			margin: 70px 15px 15px 15px;
+			min-width: 90px;
+			width: 11%;
+			text-align: right;
+			//border:1px solid #f00;
+		}
+	
+		#teams .title {
+			font-size: 0.8em;
+		}
+		
+		#teams div {
+			margin-bottom: 5px;
+			height: 70px;
+		}	
+		
+		#schedules {
+			white-space: nowrap;
+			overflow: auto;
+		}
+		
+		.schedule {
+			display: block;
+		}
+
+		.schedule div {
+			display: inline-block;
+			margin: 0 8px 5px 0;
+			padding: 5px;
+			min-width: 190px;
+			height: 60px;
+			width: 17%; // 4 - 21.5%;
+		}	
+
+		.schedule .week {
+			font-size: 1.3em;
+			color: #ccc;
+			height: 20px;
+		}
+			
+		ul {
+			margin-bottom: 40px;
+		}
+		
+		.gyms {
+			clear: both;
+			margin: 40px 10px;
+			//border: 1px solid #f00;
+		}
+
+		#rules {
+			clear: both;
+			margin: 40px 15px;
+		}		
+		
+		#rules .title {
+			margin-bottom: 0;
+			line-height: 1.1em;
+		}
+		
+		@media screen and (min-width: 1000px) {
+			article {
+				min-height: 110px;
+			}
+		}	
+
+		@media screen and (max-width: 700px) {
+			.threecol {
+				width: 95%;
+			}
+		}		
+		
+	
+	</style>
+
+	<script src="incl_/js/menu.js"></script>
+	<script src="incl_/js/schedules.js"></script>
+</head>
+
+
+<body>
+		
+<div id="header">
+	<div id="menuBG" onClick="hideMenu()"></div>	
+	<div id="menuButton"><a href="javascript:showMenu()">MENU</a></div>
+	
+	<div id="navbar">
+		<ul>
+		<li><a href="about.html">ABOUT</a></li>
+		<li><a href="practice.html">PRACTICE</a></li>
+		<li>LEAGUE</li>
+		<li><a href="events.html">EVENTS</a></li>
+		<li><a href="calendar.html">CALENDAR</a></li>
+		</ul>
+	</div>
+
+	<div id="logo"><a href="index.html"><img src="img_/eden_logo.png" height="55px"></a></div>	
+	
+	<div id="navMenu">
+		<ul onClick="hideMenu()">
+		<li><a href="javascript:hideMenu()" style="color:#666">MENU</a></li>
+		<li><a href="about.html">ABOUT</a></li>
+		<li><a href="practice.html">PRACTICE</a></li>
+		<li>LEAGUE</li>
+		<li><a href="events.html">EVENTS</a></li>
+		<li><a href="calendar.html">CALENDAR</a></li>
+		</ul>
+	</div>
+
+</div>
+
+
+<!-- Main Area -->
+	
+
+
+
+
+<div id="league">
+
+<!--
+	<div class="lg center">
+		<br><br><br><br><br><br>
+		<p>Thank you for a great season.  See you in the Fall!</p>
+
+		<p><a href="doc_/2015-2016 EBYAL Scores and Standings Final.xlsx" target="_blank">2015-2016 League Scores & Standings</a> <span class="sm" style="color:red"><b>Final</b></p>
+
+	</div>
+-->
+
+	<h1 class="center">2016-17 League</h1>
+
+	<div id="teams" class="title">
+		<div>E BRONZE</div>
+		<div>E SILVER</div>
+		<div>E GOLD</div>
+		<div>DB SILVER</div>
+		<div>DB GOLD</div>
+		<div>DG BRONZE</div>
+		<div>DG GOLD</div>
+		<div>CB SILVER</div>
+		<div>CB GOLD</div>
+		<div>CG SILVER</div>
+		<div>B BOYS</div>
+	</div>
+	
+	<div id="schedules">
+		
+		<script>
+		function getNextGame() {
+			var today = new Date();
+			today = new Date(today.getMonth()+1 + "/" + today.getDate() + "/" + today.getFullYear());
+			for (var i=0; i<league_schedule[0].length; i++) {
+				gameDate = league_schedule[0][i][1];
+				if (new Date(gameDate) >= today) return i;
+			}
+			return -1;
+		}
+
+
+		// WEEK HEADING LABEL
+		team = league_schedule[0];
+		idx = getNextGame();
+		
+		document.write("<div class='schedule'>");
+
+		for (var k=idx;k<team.length;k++) { 
+			week = team[k][0];
+			if ((week == " ") && (k == idx)) week = team[k-1][0];	// display previous week's label if blank
+			document.write("<div class='week'>" + week + "</div>");
+		}
+		
+		document.write("</div");
+		
+		document.write("<div></div>");   // HACK to fix weird wrapping
+		
+		
+		// CYCLE THROUGH EACH TEAM
+		for (var i=0;i<league_schedule.length;i++) { 
+			team = league_schedule[i];
+			
+			document.write("<div class='schedule'>");
+				
+			// CYCLE THROUGH GAMES FOR EACH WEEK FOR THE TEAM	
+			for (var j=idx;j<team.length;j++) { 
+			
+				game = team[j];
+				date = game[1];
+				date = date.substring(0,date.lastIndexOf("/"));  // display just month/date
+				day = game[2];
+				time = game[3];
+				gym = game[4];
+				vs = game[5];
+				jersey = game[6];
+		
+				document.write("<div class='" + getCellBG(gym) + "BG'>");
+				if (time == "") {
+					document.write("<br><br><br></div>");
+				}
+				else {
+					document.write("<b>" + date + " " + day + "</b><br>");
+					document.write(time + " @<a href='#gyms' style='color:#000'>" + gym + "</a><br>");
+					document.write("<span class='sm'>vs " + vs + " (" + jersey + ")</span></div>");
+				}
+
+			}
+			
+			document.write("</div>");
+		}
+		
+		</script>	
+		
+	</div>
+
+
+	<div style="clear:both; margin-left: 5px">
+		<ul>	
+<!--
+		<li><a href="doc_/EBYAL Standings Week10.xlsx" target="_blank">Current Scores & Standings - Week 10</a> <span class="sm" style="color:red"><b>Updated</b></span></li> 
+-->
+		<li><a href="doc_/2016-2017 EBYAL Schedule.xlsx" target="_blank">2016-17 EBYAL Full Schedule</a></li>
+		<li><a href="doc_/2016-2017 EBGAL Schedule.xlsx" target="_blank">2016-17 EBGAL Schedule</a></li> 
+
+		</ul>
+	</div>
+</div>
+
+
+
+<div id="rules">
+	<h1 class="center">2016-17 EBYAL & EBGAL RULES</h1>
+
+	<div class="twocol">
+		<p class="title">East Bay Youth Athletic League (EBYAL)</p>
+
+		<ul>
+		<li><a href="doc_/2016-2017 EBYAL Playing Rules BCD.doc" target="_blank">2016-17 D, C & B Division Rules</a></li>
+		<li><a href="doc_/2016-2017 EBYAL Playing Rules E.doc" target="_blank">2016-17 E Division Rules</a></li>
+		<li><a href="doc_/2016-2017 EBYAL Official Reporting Scoresheet.docx" target="_blank">2016-17 EBYAL Scoresheet</a></li>
+		</ul>
+	</div>
+
+	<div class="twocol">
+		<p class="title">East Bay Girls Athletic League (EBGAL)</p>
+	
+		<ul>
+<!--
+		<li><a href="doc_/EBGAL Game Rules 2015.pdf" target="_blank">2015-2016 Game Rules</a></li>
+-->
+		<li><a href="doc_/EBGAL Scoresheet.doc" target="_blank">EBGAL Scoresheet</a></li>
+		</ul>
+	</div>
+
+</div>
+
+
+<a class="anchor" id="gyms">.</a>
+<div class="gyms">
+
+	<h1 class="center">Gym Locations</h1>
+	
+	<div class="threecol">
+		<article class="yellowBG">
+			<p class="title">Diablo Japanese American Cultural Center (Diablo)</p>
+			<p>3165 Treat Blvd<br>Concord, CA 94518<br>
+			<a href="https://www.google.com/maps/preview#!q=Diablo+Japanese+American+Cultural+Center%2C+Concord&data=!4m15!2m14!1m13!1s0x808560ede426c8c9%3A0x2904519ad59c0ac9!3m8!1m3!1d141348!2d-122.273585!3d37.7962733!3m2!1i848!2i538!4f13.1!4m2!3d37.942377!4d-122.020765" target="_blank">Map</a></p>
+		</article>
+	</div>
+	
+	<div class="threecol">
+		<article class="redBG">
+			<p class="title">Southern Alameda County Buddhist Church (SACBC)</p>
+			<p>32975 Alvarado Niles Rd<br>Union City, CA 94587<br>
+			<a href="https://www.google.com/maps/preview#!q=Southern+Alameda+County+Buddhist+Church&data=!4m15!2m14!1m13!1s0x808f959b9a2c0eb3%3A0xb2efb5eb8acecf39!3m8!1m3!1d2206!2d-122.0700433!3d37.8760811!3m2!1i848!2i538!4f13.1!4m2!3d37.592985!4d-122.045011" target="_blank">Map</a></p>
+		</article>
+	</div>
+	
+	<div class="threecol">
+		<article class="purpleBG">
+			<p class="title">Tice Valley Community Gym (TICE)</p>
+			<p>2055 Tice Valley Blvd<br>Walnut Creek, CA 94595<br>
+			<a href="https://www.google.com/maps/preview#!q=Tice+Valley+Community+Gymnasium&data=!4m15!2m14!1m13!1s0x808f8a0893530833%3A0x2b903b39dc3acb0!3m8!1m3!1d15067!2d-122.341377!3d47.6341615!3m2!1i848!2i538!4f13.1!4m2!3d37.876081!4d-122.070043" target="_blank">Map</a></p>
+		</article>
+	</div>
+
+	<div class="threecol">
+		<article class="periwinkleBG">
+			<p class="title">Alameda Point Gym</p>
+			<p>1101 West Red Line Ave<br>Alameda, CA 94501<br>
+			<a href="https://www.google.com/maps/preview#!q=Alameda+Point+Gymnasium&data=!1m4!1m3!1d158086!2d-122.3189392!3d37.770673!4m56!2m16!1m14!1s0x0%3A0x98a80f783b054a40!3m8!1m3!1d158086!2d-122.3189392!3d37.770673!3m2!1i1138!2i1203!4f13.1!4m2!3d37.7893023!4d-122.3056197!5e4!6sAlameda+Point+Gymnasium!5m38!1m37!1sAlameda+Point+Gymnasium!4m8!1m3!1d4931!2d-122.0560738!3d37.9099239!3m2!1i1138!2i1203!4f13.1!10b1!19m6!1e1!1e2!1e9!1e10!1e12!4smaps_sv.tactile!20m13!1e1!1e2!1e3!1e4!1e5!1e9!1e10!1e11!1e12!2m2!1i203!2i100!5smaps_sv.tactile!26m4!1e12!1e13!1e3!4smaps_sv.tactile" target="_blank">Map</a></p>
+		</article>
+	</div>
+
+	<div class="threecol">
+		<article class="cyanBG">
+			<p class="title">Walnut Creek Intermediate</p>
+			<p>2425 Walnut Blvd<br>Walnut Creek 94597<br>
+			<a href="https://www.google.com/maps/preview#!q=Walnut+Creek+Intermediate&data=!4m15!2m14!1m13!1s0x808561bc7c6a9fd7%3A0xef6f0c574caab3f3!3m8!1m3!1d33691!2d-122.341377!3d47.6341615!3m2!1i1138!2i1203!4f13.1!4m2!3d37.909924!4d-122.056074" target="_blank">Map</a></p>
+		</article>
+	</div>
+	
+	<div class="threecol">
+		<article class="blueBG">
+			<p class="title">John Muir Middle School</p>
+			<p>1444 Williams St.<br>San Leandro, CA 94577<br>
+			<a href="https://www.google.com/maps/preview#!q=John+Muir+Middle+School%2C+Williams+Street%2C+San+Leandro%2C+CA&data=!4m15!2m14!1m13!1s0x808f8f8b55773ab1%3A0xad97dc522cbae525!3m8!1m3!1d2946!2d-122.1478403!3d37.7191643!3m2!1i988!2i717!4f13.1!4m2!3d37.715265!4d-122.168981" target="_blank">Map</a></p>
+		</article>
+	</div>
+	
+	<div class="threecol">
+		<article class="greenBG">
+			<p class="title">Bancroft Middle School</p>
+			<p>1150 Bancroft Ave.<br>San Leandro, CA 94577<br>
+			<a href="https://www.google.com/maps/preview#!q=Bancroft+Middle+School%2C+Bancroft+Avenue%2C+San+Leandro%2C+CA&data=!4m15!2m14!1m13!1s0x808f8fbc475479d3%3A0xc088e3c18a612e9b!3m8!1m3!1d188472!2d-122.235328!3d37.7584754!3m2!1i988!2i717!4f13.1!4m2!3d37.728054!4d-122.147725" target="_blank">Map</a></p>
+			<p class="notes">Additional parking can be found across the street from the school.  The driveway is on Callan Ave.</p>
+		</article>
+	</div>
+
+	<div class="threecol">
+		<article class="orangeBG">
+			<p class="title">Fred Korematsu High School</p>
+			<p>2200 Bancroft Ave<br>San Leandro, CA 94577<br>
+			<a href="https://www.google.com/maps/preview#!q=fred+korematsu+high+school&data=!4m15!2m14!1m13!1s0x808f8fcff4ba2577%3A0x3c1b922b9ec81a30!3m8!1m3!1d2946!2d-122.1475625!3d37.7290702!3m2!1i988!2i717!4f13.1!4m2!3d37.7154591!4d-122.1403942" target="_blank">Map</a></p>
+			<p class="notes">The gym is located at the corner of E.14th St and 138th Ave.  Street parking is available.</p>
+		</article>
+	</div>
+	
+	
+</div>
+
+
+<!-- End Main Area -->
+
+<div id="footer">
+	<div id="contact"><a href="mailto:webmaster@EdenAthleticClub.org">webmaster@EdenAthleticClub.org</a></div>
+	<div id="copyright">&copy; 2016 EDEN ATHLETIC CLUB</div>
+</div>
+	
+</body>
+</html>

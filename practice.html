@@ -1,0 +1,307 @@
+<!doctype html>
+<head>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="viewport" content="width=device-width">
+	<meta name="format-detection" content="telephone=no">
+		
+	<title>EDEN ATHLETIC CLUB :: PRACTICE</title>
+	
+	<script type="text/javascript" src="incl_/js/standalone.js"></script>
+
+	<link rel="stylesheet" href="incl_/css/normalize.css" />	
+  <link rel="stylesheet" href="incl_/css/custom.css" />
+  <link rel="stylesheet" href="incl_/css/text.css" />
+  <link rel="stylesheet" href="incl_/css/header_footer.css" />
+	<link rel="stylesheet" href="incl_/css/columns.css" />
+	
+	<style type="text/css">
+		.lg {
+			font-size: 1.3em;
+		}
+		
+		#teams {
+			float: left;
+			white-space: nowrap;
+			margin: 40px 15px 15px 15px;
+			min-width: 90px;
+			width: 11%;
+			text-align: right;
+			//border:1px solid #f00;
+		}
+	
+		#teams .title {
+			font-size: 0.8em;
+		}
+		
+		#teams div {
+			margin-top: 14px;
+			height: 40px;
+		}	
+		
+		#schedules {
+			white-space: nowrap;
+			overflow: auto;
+		}
+		
+		.schedule div {
+			display: inline-block;
+			margin: 0 8px 5px 0;
+			padding: 5px;
+			min-width: 140px;
+			height: 40px;
+			width: 17%; // 4 - 21.5%;
+		}	
+		
+		.date {
+			font-size: 1.1em;
+			color: #ccc;		
+			height: 30px;
+		}
+		
+		#rules {
+			clear: both;
+			margin: 30px 5%;
+			padding: 15px;
+			border: 1px solid #ccc;
+		}
+		
+		#rules li {
+			margin-bottom: 0.8em;
+		}
+		
+		
+		.gyms {
+			margin: 40px 10px;
+		}
+		
+
+		
+		@media screen and (max-width: 320px) {
+			
+			.schedule div {
+				min-width: 170px;
+			}		
+			
+			#rules {
+				margin: 0 15px;
+			}			
+		}
+
+
+		@media screen and (max-width: 700px) {
+			.threecol {
+				width: 95%;
+			}
+			
+		}		
+
+		@media screen and (min-width: 960px) {
+			article {
+				min-height: 150px;
+			}				
+		}	
+	</style>
+
+	<script src="incl_/js/menu.js"></script>
+	<script src="incl_/js/schedules.js"></script>	
+	<script src="incl_/js/practice.js"></script>	
+
+	<script>
+
+		function getNextPractice() {
+			var today = new Date();
+			today = new Date(today.getMonth()+1 + "/" + today.getDate() + "/" + today.getFullYear());
+			for (var i=0; i<practice_schedule[0].length; i++) {
+				practiceDate = practice_schedule[0][i][0];
+				practiceDate = practiceDate.substr(0,6) + "20" + practiceDate.substr(6,7);
+				// Change date to "09/01/2015" because some browsers interpret "09/01/15" as Sep 1, 1995
+				if (new Date(practiceDate) >= today) return i;
+			}
+			return 0;
+		}
+
+		function showSchedule() {
+			var scheduleTable = "<div class='schedule date'>";
+
+			team = practice_schedule[0];
+			idx = getNextPractice();
+
+			for (var k=idx;k<team.length;k++) { 
+				scheduleTable += "<div class='date'>" + team[k][0] + "</div>";
+			}
+
+			scheduleTable += "</div>";
+				
+		
+			for (var i=0;i<practice_schedule.length;i++) { 
+				team = practice_schedule[i];
+				
+				scheduleTable += "<div class='schedule'>";
+					
+				for (var j=idx;j<team.length;j++) { 
+				
+					date = team[j][0];
+					gym = team[j][2];
+					time = team[j][3];
+					
+					scheduleTable += "<div class='" + getCellBG(gym) + "BG'>";
+
+					if (gym == "")
+						scheduleTable += ((time != "") ? time : "No Practice") + "<br><br></div>";
+					else if (gym == "TBD")
+						scheduleTable += "Location TBD" + "<br><br></div>";
+					else
+						scheduleTable += "<a href='#gyms' style='color:#000'>" + gym + "</a>" + "<br><span class='sm'>" + time + "</div>";
+				}
+				
+				scheduleTable += "</div>";
+
+				var s = document.getElementById("schedules");
+	      		s.innerHTML = scheduleTable;
+			}	
+		}
+		
+	</script>
+</head>
+
+
+<body onLoad="showSchedule()">
+		
+<div id="header">
+	<div id="menuBG" onClick="hideMenu()"></div>
+	<div id="menuButton"><a href="javascript:showMenu()">MENU</a></div>
+	
+	<div id="navbar">
+		<ul>
+		<li><a href="about.html">ABOUT</a></li>
+		<li>PRACTICE</li>
+		<li><a href="league.html">LEAGUE</a></li>
+		<li><a href="events.html">EVENTS</a></li>
+		<li><a href="calendar.html">CALENDAR</a></li>
+		</ul>
+	</div>
+
+	<div id="logo"><a href="index.html"><img src="img_/eden_logo.png" height="55px"></a></div>	
+	
+	<div id="navMenu">
+		<ul onClick="hideMenu()">
+		<li><a href="javascript:hideMenu()" style="color:#666">MENU</a></li>
+		<li><a href="about.html">ABOUT</a></li>
+		<li>PRACTICE</li>
+		<li><a href="league.html">LEAGUE</a></li>
+		<li><a href="events.html">EVENTS</a></li>
+		<li><a href="calendar.html">CALENDAR</a></li>
+		</ul>
+	</div>
+
+</div>
+
+<!-- Main Area -->
+	
+
+<h1 class="center">Practice Schedule</h1>
+
+<!--
+	<p class="lg center">Thank you for a great season.  See you in the Fall!</p>
+-->
+
+<div id="practices">
+
+	<div id="teams" class="title">
+		<div>E NON</div>
+		<div>E BRONZE</div>
+		<div>E SILVER</div>
+		<div>E GOLD</div>
+		<div>DB SILVER</div>
+		<div>DB GOLD</div>
+		<div>DG BRONZE</div>
+		<div>DG GOLD</div>
+		<div>CB SILVER</div>
+		<div>CB GOLD</div>
+		<div>CG SILVER</div>
+		<div>B BOYS</div>
+		<div>DADS</div>	
+	</div>
+
+	<div id="schedules"></div>
+
+</div>
+
+
+
+<div id="rules">
+	<div class="title">Gym Rules</div>
+	<div class="notes">
+		<ol>
+		<li><b>NO street shoes</b> allowed - only athletic shoes.  Absolutely no spiked heels on the court.</li>
+		<li><b>NO food</b> is allowed in the gym.</li>
+		<li><b>NO sports drinks</b> but water is allowed.  Please be sure to wipe up any spills and pick up any bottles after your practice or game.</li>
+		</ol>
+		<p>It is important to follow the rules if we are going to continue to be allowed to use these gyms.  Thank you!</p>
+	</div>
+</div>
+
+<a class="anchor" id="gyms">.</a>
+<div class="gyms">
+
+	<h1 class="center">Gym Locations</h1>
+	
+	<div class="threecol">
+		<article class="purpleBG">
+			<p class="title">McKinley Elementary School</p>
+			<p>2150 E. 14th St.<br>San Leandro, CA 94577<br>
+			<a href="https://www.google.com/maps/preview#!q=McKinley+Elementary+School%2C+San+Leandro%2C+CA&data=!4m15!2m14!1m13!1s0x808f8fc12ae744c5%3A0x6acdc415fa9ee1cc!3m8!1m3!1d11786!2d-122.1403942!3d37.7154586!3m2!1i988!2i717!4f13.1!4m2!3d37.719164!4d-122.14784" target="_blank">Map</a></p>
+		</article>
+	</div>
+	<div class="threecol">
+		<article class="blueBG">
+			<p class="title">John Muir Middle School</p>
+			<p>1444 Williams St.<br>San Leandro, CA 94577<br>
+			<a href="https://www.google.com/maps/preview#!q=John+Muir+Middle+School%2C+Williams+Street%2C+San+Leandro%2C+CA&data=!4m15!2m14!1m13!1s0x808f8f8b55773ab1%3A0xad97dc522cbae525!3m8!1m3!1d2946!2d-122.1478403!3d37.7191643!3m2!1i988!2i717!4f13.1!4m2!3d37.715265!4d-122.168981" target="_blank">Map</a></p>
+		</article>
+	</div>
+	<div class="threecol">
+		<article class="greenBG">
+			<p class="title">Bancroft Middle School</p>
+			<p>1150 Bancroft Ave.<br>San Leandro, CA 94577<br>
+			<a href="https://www.google.com/maps/preview#!q=Bancroft+Middle+School%2C+Bancroft+Avenue%2C+San+Leandro%2C+CA&data=!4m15!2m14!1m13!1s0x808f8fbc475479d3%3A0xc088e3c18a612e9b!3m8!1m3!1d188472!2d-122.235328!3d37.7584754!3m2!1i988!2i717!4f13.1!4m2!3d37.728054!4d-122.147725" target="_blank">Map</a></p>
+			<p class="notes">Additional parking can be found across the street from the school.  The driveway is on Callan Ave.</p>
+		</article>
+	</div>
+	<div class="threecol">
+		<article class="orangeBG">
+			<p class="title">Fred Korematsu High School</p>
+			<p>2200 Bancroft Ave<br>San Leandro, CA 94577<br>
+			<a href="https://www.google.com/maps/preview#!q=fred+korematsu+high+school&data=!1m4!1m3!1d3218!2d-122.1403896!3d37.7154631!4m15!2m14!1m13!1s0x808f8fcff4ba2577%3A0x3c1b922b9ec81a30!3m8!1m3!1d2946!2d-122.1475625!3d37.7290702!3m2!1i988!2i717!4f13.1!4m2!3d37.7154591!4d-122.1403942" target="_blank">Map</a></p>
+			<p class="notes">The gym is located at the corner of E.14th St and 138th Ave.  Street parking is available.</p>
+		</article>
+	</div>
+	<div class="threecol">
+		<article class="redBG">
+			<p class="title">San Lorenzo High School</p>
+			<p>50 E. Lewelling Blvd.<br>San Leandro, CA 94580<br>
+			<a href="https://www.google.com/maps/preview#!q=san+lorenzo+high+school%2C+san+lorenzo%2C+ca&data=!4m15!2m14!1m13!1s0x808f91b73b5d7225%3A0x5645b363a707f3bb!3m8!1m3!1d2947!2d-122.168981!3d37.715265!3m2!1i988!2i717!4f13.1!4m2!3d37.687431!4d-122.122187" target="_blank">Map</a></p>
+			<p class="notes">Use the parking lot entrance on Ashland Ave. to access San Lorenzo High's East Gym.  Turn right at the end of the parking lot and the gym will be to your left.  Park along side the gym.</p>
+		</article>
+	</div>
+	<div class="threecol">
+		<article class="periwinkleBG">
+			<p class="title">Canyon Middle School</p>
+			<p>19600 Cull Canyon Rd.<br>Castro Valley, CA 94552<br>
+			<a href="https://www.google.com/maps/preview#!q=Canyon+Middle+School%2C+Cull+Canyon+Road%2C+Castro+Valley%2C+CA&data=!4m15!2m14!1m13!1s0x808f92451177f8c7%3A0xc95588864d077daf!3m8!1m3!1d2746!2d-122.0516289!3d37.7054856!3m2!1i768!2i668!4f13.1!4m2!3d37.705486!4d-122.051629" target="_blank">Map</a></p>
+		</article>
+	</div>
+
+</div>
+
+<!-- End Main Area -->
+
+<div id="footer">
+	<div id="contact"><a href="mailto:webmaster@EdenAthleticClub.org">webmaster@EdenAthleticClub.org</a></div>
+	<div id="copyright">&copy; 2016 EDEN ATHLETIC CLUB</div>
+</div>
+
+	
+</body>
+</html>

@@ -1,0 +1,359 @@
+<!doctype html>
+<head>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="viewport" content="width=device-width">
+		
+	<title>EDEN ATHLETIC CLUB :: CALENDAR</title>
+	
+	<script type="text/javascript" src="incl_/js/standalone.js"></script>
+
+	<link rel="stylesheet" href="incl_/css/normalize.css" />	
+  <link rel="stylesheet" href="incl_/css/custom.css" />
+  <link rel="stylesheet" href="incl_/css/text.css" />
+  <link rel="stylesheet" href="incl_/css/header_footer.css" />
+	<link rel="stylesheet" href="incl_/css/columns.css" />
+	
+	<style type="text/css">
+
+
+	#calendar {
+		padding: 0 2% 0 5%;
+		
+	}
+	
+	.year {
+		clear: left;
+		font-size: 3em;
+		color: #ccc;
+		margin: 0;
+	}
+	
+	.month {
+		clear: left;
+		margin: 0;
+		padding-top: 30px;
+		width: 90%;
+	}
+
+	.month p {
+		margin: 0;
+		padding-bottom: 5px;
+		border-bottom: 1px solid #dedede;	
+	}
+	
+	.event {
+		clear: left;
+		padding-top: 10px;
+	}
+
+	.date {
+		min-width: 55px;
+		padding: 5px;
+		font-size: 1.3em;
+		color: #ccc;
+		text-align: right;
+		float: left;
+		//border: 1px solid #dedede;	
+	}
+
+	.desc {
+		width: 68%;
+		padding: 8px;
+		margin-left: 10px;
+		font-size: 0.95em;
+		float: left;
+	}
+	
+	.sm {
+		font-size: 0.6em;
+	}
+
+	
+	@media screen and (max-width: 800px) {
+		.desc {
+			width: 62%;
+			padding: 6px;
+		}
+	}	
+
+	
+	@media screen and (max-width: 660px) {
+		.twocol {
+			width: 95%;
+		}
+		
+		#calendar {
+			padding: 0 2% 0 2%;
+			
+		}
+	
+		.month {
+			width: 98%;	
+		}	
+		
+		.desc {
+			width: 72%;
+			padding: 6px;
+		}
+	}	
+
+	@media screen and (max-width:420px) {
+		.month {
+			width: 100%;	
+		}	
+		
+		.desc {
+			width: 65%;
+			padding: 6px;
+		}
+	}	
+	
+
+		
+	</style>
+
+	<script src="incl_/js/menu.js"></script>
+	
+</head>
+
+
+<body>
+		
+<div id="header">
+	<div id="menuBG" onClick="hideMenu()"></div>
+	<div id="menuButton"><a href="javascript:showMenu()">MENU</a></div>
+	
+	<div id="navbar">
+		<ul>
+		<li><a href="about.html">ABOUT</a></li>
+		<li><a href="practice.html">PRACTICE</a></li>
+		<li><a href="league.html">LEAGUE</a></li>
+		<li><a href="events.html">EVENTS</a></li>
+		<li>CALENDAR</li>
+		</ul>
+	</div>
+
+	<div id="logo"><a href="index.html"><img src="img_/eden_logo.png" height="55px"></a></div>	
+	
+	<div id="navMenu">
+		<ul onClick="hideMenu()">
+		<li><a href="javascript:hideMenu()" style="color:#666">MENU</a></li>
+		<li><a href="about.html">ABOUT</a></li>
+		<li><a href="practice.html">PRACTICE</a></li>
+		<li><a href="league.html">LEAGUE</a></li>
+		<li><a href="events.html">EVENTS</a></li>
+		<li>CALENDAR</li>
+		</ul>
+	</div>
+
+</div>
+
+
+<!-- Main Area -->
+	
+
+<h1 class="center">Calendar of Events</h1>
+
+
+<div id="calendar">
+	<div class="twocol">
+		<h1 class="year">2016</h1>
+		
+		<div class="month">
+			<p class="title">September</p>
+
+<!--
+			<div class="event">
+				<div class="date">9</div>
+				<div class="desc periwinkleBorder">Mandatory Coaches' Meeting<br><span class="gray">7:30pm @ Eden Center</span></div>
+			</div>		
+-->
+			<div class="event">
+				<div class="date">11</div>
+				<div class="desc">PRACTICES BEGIN</div>
+			</div>
+<!--
+			<div class="event">
+				<div class="date">12</div>
+				<div class="desc redBorder">Bazaar Appreciation Lunch<br><span class="gray">12pm-3pm @ Eden Center</span></div>
+			</div>		
+-->
+			<div class="event">
+				<div class="date gray">14</div>
+				<div class="desc blueBorder">EAC Board Meeting<br><span class="gray">7:30pm @ Eden Center</span></div>
+			</div>		
+<!--
+			<div class="event">
+				<div class="date">18</div>
+				<div class="desc periwinkleBorder">Mandatory Parent Orientation<br><span class="gray">7:30pm @ Eden Center</span></div>
+			</div>	
+-->
+		</div>
+		
+		<div class="month">		
+			<p class="title">October</p>
+<!--
+			<div class="event">
+				<div class="date">4</div>
+				<div class="desc purpleBorder">Eden Holiday Craft Show<br><span class="gray">9am-4pm @ Marina Community Center</span></div>
+			</div>		
+-->
+			<div class="event">
+				<div class="date">12</div>
+				<div class="desc blueBorder">EAC Board Meeting<br><span class="gray">7:30pm @ Eden Center</span></div>
+			</div>		
+<!--
+			<div class="event">
+				<div class="date">25</div>
+				<div class="desc blueBorder">EAC Kick Off Dinner<br><span class="gray">Time TBD @ Canyon Middle School</span></div>
+			</div>		
+-->
+		</div>
+		
+		<div class="month">
+			<p class="title">November</p>
+		
+<!--
+			<div class="event">
+				<div class="date">8</div>
+				<div class="desc periwinkleBorder">EBYAL Mandatory Meeting<br><span class="gray">1pm-3pm @ Buddhist Church of Oakland</span></div>
+			</div>				
+-->
+			<div class="event">
+				<div class="date">16</div>
+				<div class="desc blueBorder">EAC Board Meeting<br><span class="gray">7:30pm @ Eden Center</span></div>
+			</div>		
+		</div>
+
+		<div class="month">
+			<p class="title">December</p>
+			<div class="event">
+				<div class="date">5</div>
+				<div class="desc">SEASON BEGINS</div>
+			</div>
+
+			<div class="event">
+				<div class="date">11-12</div>
+				<div class="desc greenBorder"><a href="events.html#mochi">Mochitsuki</a><br><span class="gray">@ Eden Center</span></div>
+			</div>		
+			
+			<div class="event">
+				<div class="date">14</div>
+				<div class="desc blueBorder">EAC Board Meeting<br><span class="gray">7:30pm @ Eden Center</span></div>
+			</div>		
+
+			<div class="event">
+				<div class="date">23</div>
+				<div class="desc">WINTER BREAK</div>
+			</div>
+			
+			<div class="event">
+				<br><br><br>
+			</div>			
+		</div>
+	</div>
+
+
+	<div class="twocol">
+		<h1 class="year">2017</h1>
+		
+		<div class="month">
+			<p class="title">January</p>
+			<div class="event">
+				<div class="date">6</div>
+				<div class="desc">PRACTICES RESUME</div>
+			</div>
+
+			<div class="event">
+				<div class="date gray">18</div>
+				<div class="desc blueBorder">EAC Board Meeting<br><span class="gray">7:30pm @ Eden Center</span></div>
+			</div>	
+						
+		</div>
+		
+		<div class="month">
+			<p class="title">February</p>
+			
+			<div class="event">
+				<div class="date">15</div>
+				<div class="desc blueBorder">EAC Board Meeting<br><span class="gray">7:30pm @ Eden Center</span></div>
+			</div>		
+					
+		</div>
+		
+		<div class="month">
+			<p class="title">March</p>
+			
+			<div class="event">
+				<div class="date">11</div>
+				<div class="desc orangeBorder"><a href="events.html#edenjam">Eden Jamboree</a><br><span class="gray">@ The Ultimate Fieldhouse -  Walnut Creek</span></div>
+			</div>		
+
+			<div class="event">
+				<div class="date">15</div>
+				<div class="desc blueBorder">EAC Board Meeting<br><span class="gray">7:30pm @ Eden Center</span></div>
+			</div>	
+		</div>
+
+		<div class="month">
+			<p class="title">April</p>
+			
+			<div class="event">
+				<div class="date">12</div>
+				<div class="desc blueBorder">EAC Board Meeting<br><span class="gray">7:30pm @ Eden Center</span></div>
+			</div>		
+		</div>
+
+		<div class="month">
+			<p class="title">May</p>
+			<div class="event">
+				<div class="date">17</div>
+				<div class="desc blueBorder">EAC Board Meeting<br><span class="gray">7:30pm @ Eden Center</span></div>
+			</div>		
+		</div>
+
+		<div class="month">
+			<p class="title">June</p>
+
+			<div class="event">
+				<div class="date">10-11</div>
+				<div class="desc purpleBorder"><a href="events.html#bazaar">Eden Township Bazaar</a><br><span class="gray">@ Eden Center</span></div>
+			</div>
+
+			<div class="event">
+				<div class="date">14</div>
+				<div class="desc blueBorder">EAC Board Meeting<br><span class="gray">7:30pm @ Eden Center</span></div>
+			</div>		
+		</div>
+
+		<div class="month">
+			<p class="title">July</p>			
+			<div class="event">
+				<div class="date">12</div>
+				<div class="desc blueBorder">EAC Board Meeting<br><span class="gray">7:30pm @ Eden Center</span></div>
+			</div>		
+		</div>
+		
+		<div class="month">
+			<p class="title">August</p>			
+			<div class="event">
+				<div class="date">16</div>
+				<div class="desc blueBorder">EAC Board Meeting<br><span class="gray">7:30pm @ Eden Center</span></div>
+			</div>		
+		</div>
+
+	</div>
+</div>
+
+
+<!-- End Main Area -->
+
+<div id="footer">
+	<div id="contact"><a href="mailto:webmaster@EdenAthleticClub.org">webmaster@EdenAthleticClub.org</a></div>
+	<div id="copyright">&copy; 2016 EDEN ATHLETIC CLUB</div>
+</div>
+
+	
+</body>
+</html>

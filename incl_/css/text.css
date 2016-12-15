@@ -1,0 +1,159 @@
+	
+	@font-face {
+		font-family: 'OstrichBlack';
+		src: url('../webfonts/ostrich-black-webfont.eot');
+		src: url('../webfonts/ostrich-black-webfont.eot?#iefix') format('embedded-opentype'),
+			 url('../webfonts/ostrich-black-webfont.woff') format('woff'),
+			 url('../webfonts/ostrich-black-webfont.ttf') format('truetype'),
+			 url('../webfonts/ostrich-black-webfont.svg#ostrichblack') format('svg');
+		font-weight: normal;
+		font-style: normal;
+	}
+	
+	@font-face {
+		font-family: 'OstrichRegular';
+		src: url('../webfonts/ostrich-regular-webfont.eot');
+		src: url('../webfonts/ostrich-regular-webfont.eot?#iefix') format('embedded-opentype'),
+			 url('../webfonts/ostrich-regular-webfont.woff') format('woff'),
+			 url('../webfonts/ostrich-regular-webfont.ttf') format('truetype'),
+			 url('../webfonts/ostrich-regular-webfont.svg#ostrichregular') format('svg');
+		font-weight: normal;
+		font-style: normal;
+	}
+	
+	@font-face {
+		font-family: 'OstrichLight';
+		src: url('../webfonts/ostrich-light-webfont.eot');
+		src: url('../webfonts/ostrich-light-webfont.eot?#iefix') format('embedded-opentype'),
+			 url('../webfonts/ostrich-light-webfont.woff') format('woff'),
+			 url('../webfonts/ostrich-light-webfont.ttf') format('truetype'),
+			 url('../webfonts/ostrich-light-webfont.svg#ostrichlight') format('svg');
+		font-weight: normal;
+		font-style: normal;
+	}
+	
+	@font-face {
+		font-family: 'Bebas';
+		src: url('../webfonts/bebas-webfont.eot');
+		src: url('../webfonts/bebas-webfont.eot?#iefix') format('embedded-opentype'),
+			 url('../webfonts/bebas-webfont.woff') format('woff'),
+			 url('../webfonts/bebas-webfont.ttf') format('truetype'),
+			 url('../webfonts/bebas-webfont.svg#bebas') format('svg');
+		font-weight: normal;
+		font-style: normal;
+	}
+	
+	/* 
+	// type
+	*/
+	
+		
+	.black {
+		font-family: "OstrichBlack", Helvetica, sans-serif;
+	}
+	
+	.reg {
+		font-family: "OstrichRegular", Helvetica, sans-serif;
+	}
+	
+	.light {
+		font-family: "OstrichLight", Helvetica, sans-serif;
+	}
+			
+			
+	.title {
+		font-family: "OstrichBlack", Helvetica, sans-serif;
+		font-size: 1.4em;
+	}
+	
+	.gray {
+		color: #999;
+	}
+	
+	.center {
+		text-align: center;
+	}
+	
+	.sm {
+		font-size: 0.9em;
+	}
+	
+	a {
+		color: #0066cc;
+		text-decoration: none;
+	}
+	
+	a: visited {
+		color: #0066cc;
+	}
+
+	a: hover {
+		color: #f00;
+	}
+				
+	h1 {
+		margin-top: 80px;
+		font-family: "OstrichRegular", Helvetica, sans-serif;
+		font-size: 2.5em;
+		line-height: 1em;
+		clear: both;		
+	}
+	
+	p {
+		margin: 0;
+		margin-bottom: 1.3em;
+	}
+	
+	.notes {
+		margin-top: 10px;
+		font-size: 0.9em;
+		font-style: italic;
+	}
+		
+	.wrap{
+		clear: both;
+		padding: 0 20px;
+		-webkit-column-gap:30px;
+		-moz-column-gap:30px;
+		column-gap:30px;	
+	}
+		
+	
+	@media screen and (min-width: 320px){
+		h1{ font-size: 2.5em; }
+	}
+	
+	@media screen and (min-width: 600px){
+		h1{ font-size: 3em; }
+		
+		.wrap {
+			padding: 0 30px;
+			-webkit-column-count:2;
+			-moz-column-count:2;	
+			column-count:2;	
+			font-size: 1.05em;
+		}		
+	}
+	
+	@media screen and (min-width: 768px){
+		h1{ font-size: 3.75em; }
+	}
+	
+	@media screen and (min-width: 1024px){
+		h1{ font-size: 4.5em; }
+		
+		
+		.wrap {
+			padding: 0 30px;
+			-webkit-column-count:3;
+			-moz-column-count:3;	
+			column-count:3;
+			font-size: 1.15em;
+		}			
+	}
+	
+	@media screen and (min-width: 1300px){
+		h1{ font-size: 5.25em; }
+	}
+	
+	

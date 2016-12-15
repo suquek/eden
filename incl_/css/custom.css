@@ -1,0 +1,94 @@
+	body {
+		width: 1280px;	 
+		max-width: 100%;
+		margin: 0 auto;
+	}
+	
+	article {
+		padding: 0.7em;
+		text-align: left;
+		font-size: 1em;
+		border: 1px solid #ccc;
+	}
+	
+	article p {
+		margin: 0;
+		line-height: 1.2em;	
+	}	
+	
+	b {
+		font-weight: bold;
+	}
+	
+	.anchor {
+		color: #fff;
+	}
+		
+	.greenBG {
+		background-color: #b7e5bd;
+	}
+	
+	.ltgreenBG {
+		background-color: #c0f9b9;
+	}
+
+	.blueBG {
+		background-color: #b1dafc;
+	}		
+	
+	.pinkBG {
+		background-color: #ffc8fc;
+	}
+	
+	.purpleBG {
+		background-color: #d1b7e5;
+	}		
+	
+	.redBG {
+		background-color: #eab3a4;
+	}
+
+	.orangeBG {
+		background-color: #fae6af;
+	}		
+
+	.yellowBG {
+		background-color: #f8f39c;
+	}
+	
+	.cyanBG {
+		background-color: #c8fefc;
+	}
+	
+	.periwinkleBG {
+		background-color: #edb0fe;
+	}
+	
+	.grayBG {
+		background-color: #efefef;
+	}
+
+	.greenBorder {
+		border: 2px solid #b7e5bd;
+	}
+
+	.blueBorder {
+		border: 2px solid #89bce5;
+	}		
+
+	.purpleBorder {
+		border: 2px solid #d1b7e5;
+	}		
+	
+	.redBorder {
+		border: 2px solid #eab3a4;
+	}
+
+	.orangeBorder {
+		border: 2px solid #efbf8f;
+	}	
+	
+	.periwinkleBorder {
+		border: 2px solid #edb0fe;
+	}
+		

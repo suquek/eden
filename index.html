@@ -1,0 +1,292 @@
+<!doctype html>
+<head>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="viewport" content="width=device-width">
+
+	<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+	
+	<title>EDEN ATHLETIC CLUB</title>
+
+	<script type="text/javascript" src="incl_/js/standalone.js"></script>
+	
+	<link rel="stylesheet" href="incl_/css/normalize.css" />	
+  <link rel="stylesheet" href="incl_/css/custom.css" />
+  <link rel="stylesheet" href="incl_/css/text.css" />
+  <link rel="stylesheet" href="incl_/css/header_footer.css" />
+	<link rel="stylesheet" href="incl_/css/columns.css" />
+	
+	<style type="text/css">
+		#splash {
+			margin-top: 50px;
+			margin-bottom: 15px;
+		}
+		
+		#splash img{
+			width: 100%;
+			border: 0;
+		}
+		
+		#practice {
+			margin-top: 10px;
+			//width: 120px;
+		}
+		
+		#league {
+			margin-top: 10px;
+			//width: 120px;
+		}
+
+		#date {
+			color: #AEAEAE;
+			font-size: 0.8em;
+			text-align: center;
+			margin-top: 2em;
+			margin-bottom: -1em;
+		}
+	
+	</style>
+
+
+	<script src="incl_/js/menu.js"></script>
+	<script src="incl_/js/schedules.js"></script>
+	<script src="incl_/js/practice.js"></script>	
+
+	<script>
+
+		function createCookie(name,value,days) {
+			if (days) {
+				var date = new Date();
+				date.setTime(date.getTime()+(days*24*60*60*1000));
+				var expires = "; expires="+date.toGMTString();
+			}
+			else var expires = "";
+			document.cookie = name+"="+value+expires+"; path=/";
+		}
+		
+		function readCookie(name) {
+			var nameEQ = name + "=";
+			var ca = document.cookie.split(';');
+			for(var i=0;i < ca.length;i++) {
+				var c = ca[i];
+				while (c.charAt(0)==' ') c = c.substring(1,c.length);
+				if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+			}
+			return null;
+		}
+		
+		function eraseCookie(name) {
+			createCookie(name,"",-1);
+		}
+
+		function getNextPractice(team) {
+			var today = new Date();
+			today = new Date(today.getMonth()+1 + "/" + today.getDate() + "/" + today.getFullYear());
+			for (var i=0; i<practice_schedule[team].length; i++) {
+				practiceDate = practice_schedule[team][i][0];
+				practiceTime = practice_schedule[team][i][3];
+				practiceDate = practiceDate.substr(0,6) + "20" + practiceDate.substr(6,7);  // Change date to "09/01/2015" because some browsers interpret "09/01/15" as Sep 1, 1995
+				if ((new Date(practiceDate) >= today) && (practiceTime != "")) return i;
+			}
+			return -1;
+		}
+
+		function getNextGame(team) {
+			var today = new Date();
+			today = new Date(today.getMonth()+1 + "/" + today.getDate() + "/" + today.getFullYear());
+			
+			league_schedule[team];
+			for (var i=0; i<league_schedule[team].length; i++) {
+				gameDate = league_schedule[team][i][1];
+				gameTime = league_schedule[team][i][3];
+				gameDate = gameDate.substr(0,6) + "20" + gameDate.substr(6,7);
+				if ((new Date(gameDate) >= today) && (gameTime != "")) return i;
+				
+			}
+			return -1;
+		}
+		
+		function setTeam() {
+			var e = document.getElementById("teams");
+			var idx = e.selectedIndex;
+			console.log (e.value);
+			//createCookie("team",idx, 7);
+			
+			//document.cookie = "team=1";
+			//cookie.set("team", idx );
+			//alert(readCookie("team"));
+		}
+		
+		function showSchedule() {
+			var e = document.getElementById("teams");
+			var idx = e.selectedIndex - 1;
+			
+			var practice = document.getElementById("practice");
+			var league = document.getElementById("league");
+			
+			// Reset schedule
+			practice.innerHTML = "";
+			league.innerHTML = "";
+			
+			var week = getNextPractice(idx);
+
+			if (week >= 0) {
+				var nextPractice = practice_schedule[idx][week];
+				
+				var practiceDate = nextPractice[0];
+				practiceDate = practiceDate.substring(0,practiceDate.lastIndexOf("/"));  // display just month/date
+				var practieDay = nextPractice[1];
+				var practiceGym = nextPractice[2];
+				var practiceTime = nextPractice[3];
+				practiceStartTime = practiceTime.substring(0,practiceTime.indexOf(" ")) + "pm";
+				
+				if (practiceTime == "Location TBD") 
+					practice.innerHTML = "<p><b>Next Practice:</b><br>" + practiceDate + " Fri " + "<br>" + practiceTime + "<p>";
+				else
+					practice.innerHTML = "<p><b>Next Practice:</b><br>" + practiceDate + " Fri " + practiceStartTime + "<br>@<a href='practice.html#gyms'>" + practiceGym + "</a><p>";
+			}
+
+			idx--;		// subtract index by 1 because E Non's don't play league games
+			var week = getNextGame(idx);
+			if (week >= 0) {
+				var nextGame = league_schedule[idx][week];
+				
+				var gameDate = nextGame[1];
+				gameDate = gameDate.substring(0,gameDate.lastIndexOf("/"));  // display just month/date
+				var gameDay = nextGame[2];
+				var gameTime = nextGame[3];
+				var gameGym = nextGame[4];
+				var gameVs = nextGame[5];
+				var gameJersey = nextGame[6];
+
+				if (nextGame.length) league.innerHTML = "<p><b>Next Game:</b><br>" + gameDate + " " + gameDay + " " + gameTime + "<br>@<a href='league.html#gyms'>" + gameGym + "</a><br>" + "vs " + gameVs + " (" + gameJersey + ")<p>";
+			}
+		}
+
+		function loadTeam() {
+//			idx = readCookie('team');
+//			e.selectedIndex = idx;
+//			showSchedule();
+//			alert(idx);
+		}
+		
+
+	</script>
+</head>
+
+
+<body onLoad="loadTeam()">
+		
+<div id="header">
+	<div id="menuBG" onClick="hideMenu()"></div>
+	<div id="menuButton"><a href="javascript:showMenu()">MENU</a></div>
+	
+	<div id="navbar">
+		<ul>
+		<li><a href="about.html">ABOUT</a></li>		
+		<li><a href="practice.html">PRACTICE</a></li>
+		<li><a href="league.html">LEAGUE</a></li>
+		<li><a href="events.html">EVENTS</a></li>
+		<li><a href="calendar.html">CALENDAR</a></li>
+		</ul>
+	</div>
+
+	<div id="navMenu">
+		<ul onClick="hideMenu()">
+		<li><a href="javascript:hideMenu()" style="color:#666">MENU</a></li>
+		<li><a href="about.html">ABOUT</a></li>
+		<li><a href="practice.html">PRACTICE</a></li>
+		<li><a href="league.html">LEAGUE</a></li>
+		<li><a href="events.html">EVENTS</a></li>
+		<li><a href="calendar.html">CALENDAR</a></li>
+		</ul>
+	</div>
+	
+</div>
+
+
+<div id="splash"><img src="img_/home01.png" /></div>
+
+<!-- Main Area -->
+	
+<div class="container">
+
+	<div class="threecol">
+		<article>
+
+			<p class="title">Practice & League Schedule</p>
+
+<!--
+			See you in the Fall!		
+
+
+		<p class="title">Online Registration <span style="color:red">NEW!</span></p>
+		<p><a href="secure/register.html">Register now</a> for the 2015-16 Season.</p>
+-->
+			<form>
+				<select id="teams" onChange="setTeam(); showSchedule()">
+					<option selected="selected">Select a team:</option>
+					<option value="EN">E Non</option>
+					<option value="EB">E Bronze</option>
+					<option value="ES">E Silver</option>
+					<option value="EG">E Gold</option>
+					<option value="DBS">DB Silver</option>
+					<option value="DBG">DB Gold</option>
+					<option value="DGB">DG Bronze</option>
+					<option value="DGG">DG Gold</option>  
+					<option value="CBS">CB Silver</option>
+					<option value="CBG">CB Gold</option>
+					<option value="CGS">CG Silver</option> 
+					<option value="BB">B Boys</option>
+				</select>
+			</form>
+
+			<div>
+				<div id="practice" class="venue"></div>
+				<div id="league" class="venue"></div>
+			</div>
+
+<!--
+			<br>
+			<p class="title">Tournament Schedule</p>
+			<p><a href="doc_/2014-15 Tourney Schedule.pdf" target="_blank">2014-15 Tournaments</a></p>
+-->
+		</article>
+	</div>
+<!--
+	<div class="threecol">
+		<article>
+			<p class="title">2016 Eden Jam</p>
+			<p><a href="doc_/2016 EdenJamProgram.pdf" target="_blank">Download the Jam Program!</a></p>	
+		</article>
+	</div>
+-->
+	<div class="threecol">
+		<article>
+			<p class="title">Newsletter</p>
+			<p><a href="doc_/2016.12 Newsletter.pdf" target="_blank">Dec 2016</a></p>
+		</article>
+	</div>
+
+
+	<div class="threecol">
+		<article>
+			<p class="title">Upcoming Events</p>
+			<p><a href="events.html#mochi">Mochitsuki 2016</a><br>Sat, December 10, 2016</p>	
+		</article>
+	</div>
+
+</div>
+
+<div id="date">Last updated on Dec 2, 2016</div>
+
+<!-- End Main Area -->
+
+<div id="footer">
+	<div id="contact"><a href="mailto:webmaster@EdenAthleticClub.org">webmaster@EdenAthleticClub.org</a></div>
+	<div id="copyright">&copy; 2016 EDEN ATHLETIC CLUB</div>
+</div>
+
+	
+</body>
+</html>
